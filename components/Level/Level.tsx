@@ -1,0 +1,1 @@
+/* Component will be called to play a level. It is used as a template with different props depending on the content of the level. */

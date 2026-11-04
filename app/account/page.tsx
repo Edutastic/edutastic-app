@@ -1,0 +1,1 @@
+/* The account page will let users edit their credentials (name, email) as well as their age group. */

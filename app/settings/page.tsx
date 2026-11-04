@@ -1,0 +1,1 @@
+/* Additional page which will let the user switch between English and Dutch or change the app theme. */
