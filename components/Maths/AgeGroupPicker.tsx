@@ -1,0 +1,36 @@
+"use client";
+
+import { useState } from "react";
+import { ageGroups } from "../../lib/sampleData";
+
+/** Visual age-group selector (state is local only – no persistence yet). */
+export default function AgeGroupPicker() {
+  const [selected, setSelected] = useState("4-6");
+
+  return (
+    <div role="radiogroup" aria-label="Choose an age group" className="grid gap-4 sm:grid-cols-3">
+      {ageGroups.map((g) => {
+        const on = selected === g.value;
+        return (
+          <button
+            key={g.value}
+            type="button"
+            role="radio"
+            aria-checked={on}
+            onClick={() => setSelected(g.value)}
+            className={`rounded-3xl border-[3px] p-5 text-center transition-all hover:-translate-y-1 ${
+              on
+                ? "border-grape-600 bg-grape-100 text-grape-900 shadow-[0_6px_0_#6234e0]"
+                : "border-line bg-surface shadow-[0_6px_0_var(--line)]"
+            }`}
+          >
+            <div className="text-5xl">{g.emoji}</div>
+            <p className="mt-1 font-display text-xl font-semibold">{g.label}</p>
+            <p className={`text-sm ${on ? "text-grape-800" : "text-ink-soft"}`}>{g.blurb}</p>
+            {on && <span className="ed-chip ed-chip-mint mt-2">✓ Selected</span>}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
