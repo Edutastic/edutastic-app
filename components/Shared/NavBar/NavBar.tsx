@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Logo from "../Logo/Logo";
 import { learner } from "../../../lib/sampleData";
 import { useAvatar } from "../AvatarContext";
+import { isChromeless } from "../../../lib/routes";
 
 export const NAV_ITEMS = [
   { href: "/", label: "Home", emoji: "🏠" },
@@ -22,8 +23,8 @@ export default function NavBar() {
   const pathname = usePathname();
   const { avatar } = useAvatar();
 
-  // The game screen is immersive: no navigation, just the exit button.
-  if (pathname.startsWith("/game")) return null;
+  // Game and sign-in screens are full-screen: no navigation bar.
+  if (isChromeless(pathname)) return null;
 
   return (
     <>

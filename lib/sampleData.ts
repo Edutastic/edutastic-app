@@ -7,7 +7,7 @@
 export const learner = {
   name: "John",
   fullName: "John Marston",
-  ageGroup: "4-6",
+  ageGroup: "4-5",
   avatar: "🦊",
   streak: 5,
   stars: 128,
@@ -27,9 +27,10 @@ export const subjects = [
 ];
 
 export const ageGroups = [
-  { value: "4-6", label: "Ages 4–6", emoji: "🐣", blurb: "Little explorers" },
-  { value: "7-9", label: "Ages 7–9", emoji: "🚀", blurb: "Rising stars" },
-  { value: "10-12", label: "Ages 10–12", emoji: "🏆", blurb: "Super champions" },
+  { value: "4-5", label: "Ages 4–5", emoji: "🐣", blurb: "Little explorers" },
+  { value: "6-8", label: "Ages 6–8", emoji: "🚀", blurb: "Rising stars" },
+  { value: "9-10", label: "Ages 9–10", emoji: "🏆", blurb: "Super champions" },
+  { value: "11-12", label: "Ages 11–12", emoji: "👑", blurb: "Brainy legends" },
 ];
 
 export const mathTopics = [

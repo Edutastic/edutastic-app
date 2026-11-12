@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "../Logo/Logo";
+import { isChromeless } from "../../../lib/routes";
 
 const LINKS = [
   { href: "/subjects", label: "Learn" },
@@ -15,7 +16,7 @@ const LINKS = [
 
 export default function Footer() {
   const pathname = usePathname();
-  if (pathname.startsWith("/game")) return null;
+  if (isChromeless(pathname)) return null;
 
   return (
     <footer

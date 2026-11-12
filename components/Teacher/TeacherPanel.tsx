@@ -18,7 +18,7 @@ import Mascot from "../ui/Mascot";
 export type TeacherMessage = { from: "teacher" | "child"; text: string };
 
 const placeholderMessages: TeacherMessage[] = [
-  { from: "teacher", text: "Hi there! I'm Eddie, your learning buddy! 👋" },
+  { from: "teacher", text: "Hi there! I'm Felix, your learning buddy! 👋" },
   { from: "child", text: "Can you help me with a level?" },
   { from: "teacher", text: "Of course! (Sample message – the real Teacher is coming soon.)" },
 ];
@@ -31,7 +31,7 @@ export default function TeacherPanel({ messages = placeholderMessages, enabled =
       <header className="flex items-center gap-3 bg-grape-600 px-5 py-3 text-white">
         <Mascot size={44} />
         <div className="flex-1">
-          <p className="font-display text-xl font-semibold leading-none">Eddie the Teacher</p>
+          <p className="font-display text-xl font-semibold leading-none">Felix the Teacher</p>
           <p className="text-sm text-white/80">{enabled ? "Online" : "Coming soon"}</p>
         </div>
         <span className="ed-chip">🚧 Preview</span>

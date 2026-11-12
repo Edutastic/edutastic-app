@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import { useTheme } from "../../components/Shared/ThemeContext";
 
 /*
   Settings page.
@@ -24,15 +25,14 @@ function Row({ emoji, title, desc, children }: { emoji: string; title: string; d
 }
 
 export default function SettingsPage() {
-  const [dark, setDark] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const dark = theme === "dark";
   const [lang, setLang] = useState<"en" | "nl">("en");
   const [sound, setSound] = useState(true);
   const [music, setMusic] = useState(true);
 
   function toggleTheme() {
-    const next = !dark;
-    setDark(next);
-    document.documentElement.dataset.theme = next ? "dark" : "light";
+    setTheme(dark ? "light" : "dark");
   }
 
   return (

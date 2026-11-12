@@ -40,14 +40,7 @@ export default function ProgressPage() {
         </div>
       </section>
 
-      <div role="note" className="flex items-start gap-3 rounded-3xl border-2 border-dashed border-sun-400 bg-sun-100 p-4 text-[#4a3200]">
-        <span className="text-3xl" aria-hidden="true">🧪</span>
-        <p className="font-semibold">
-          <span className="font-display text-lg font-semibold">Demonstration data. </span>
-          Every number, chart and level on this page is a made-up example to show how progress will look.
-          Real progress tracking has not been built yet.
-        </p>
-      </div>
+
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Weekly activity */}

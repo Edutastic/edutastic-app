@@ -4,6 +4,8 @@ import "./globals.css";
 import NavBar from "../components/Shared/NavBar/NavBar";
 import Footer from "../components/Shared/Footer/Footer";
 import { AvatarProvider } from "../components/Shared/AvatarContext";
+import { ThemeProvider } from "../components/Shared/ThemeContext";
+import { RegistrationProvider } from "../components/Auth/RegistrationContext";
 
 const fredoka = Fredoka({
   variable: "--font-fredoka",
@@ -27,13 +29,17 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${fredoka.variable} ${nunito.variable} h-full antialiased`}>
+    <html lang="en" data-theme="dark" className={`${fredoka.variable} ${nunito.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <AvatarProvider>
-          <NavBar />
-          <div className="flex-1">{children}</div>
-          <Footer />
-        </AvatarProvider>
+        <ThemeProvider>
+          <AvatarProvider>
+            <RegistrationProvider>
+              <NavBar />
+              <div className="flex-1">{children}</div>
+              <Footer />
+            </RegistrationProvider>
+          </AvatarProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

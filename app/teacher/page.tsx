@@ -24,7 +24,7 @@ export default function TeacherPage() {
           <div className="space-y-4">
             <span className="ed-chip">🦉 AI Teacher</span>
             <h1 className="text-4xl font-bold sm:text-5xl">
-              Meet <span className="text-sun-400">Eddie</span>, your learning buddy
+              Meet <span className="text-sun-400">Felix</span>, your learning buddy
             </h1>
             <p className="max-w-lg text-lg text-white/85">
               Soon you&apos;ll be able to chat with a friendly teacher who helps you learn at your own pace.

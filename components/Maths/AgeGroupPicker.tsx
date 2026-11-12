@@ -5,10 +5,10 @@ import { ageGroups } from "../../lib/sampleData";
 
 /** Visual age-group selector (state is local only – no persistence yet). */
 export default function AgeGroupPicker() {
-  const [selected, setSelected] = useState("4-6");
+  const [selected, setSelected] = useState("4-5");
 
   return (
-    <div role="radiogroup" aria-label="Choose an age group" className="grid gap-4 sm:grid-cols-3">
+    <div role="radiogroup" aria-label="Choose an age group" className="grid grid-cols-2 gap-4 lg:grid-cols-4">
       {ageGroups.map((g) => {
         const on = selected === g.value;
         return (

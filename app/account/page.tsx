@@ -27,7 +27,7 @@ const LEARNER_NAME = "John Marston";
 export default function AccountPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [ageGroup, setAgeGroup] = useState("4-6");
+  const [ageGroup, setAgeGroup] = useState("4-5");
   const { avatar, setAvatar } = useAvatar();
   const [saved, setSaved] = useState(false);
 
@@ -111,7 +111,7 @@ export default function AccountPage() {
 
           <fieldset>
             <legend className="mb-3 text-2xl font-semibold font-display">Age group</legend>
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {ageGroups.map((g) => (
                 <label
                   key={g.value}
