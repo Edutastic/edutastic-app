@@ -3,7 +3,7 @@ import { Fredoka, Nunito } from "next/font/google";
 import "./globals.css";
 import NavBar from "../components/Shared/NavBar/NavBar";
 import Footer from "../components/Shared/Footer/Footer";
-import { AvatarProvider } from "../components/Shared/AvatarContext";
+import { ChildProfileProvider } from "../components/Shared/ChildProfileContext";
 import { ThemeProvider } from "../components/Shared/ThemeContext";
 import { RegistrationProvider } from "../components/Auth/RegistrationContext";
 
@@ -32,13 +32,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" data-theme="dark" className={`${fredoka.variable} ${nunito.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
-          <AvatarProvider>
+          <ChildProfileProvider>
             <RegistrationProvider>
               <NavBar />
               <div className="flex-1">{children}</div>
               <Footer />
             </RegistrationProvider>
-          </AvatarProvider>
+          </ChildProfileProvider>
         </ThemeProvider>
       </body>
     </html>

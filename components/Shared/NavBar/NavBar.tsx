@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "../Logo/Logo";
 import { learner } from "../../../lib/sampleData";
-import { useAvatar } from "../AvatarContext";
+import { useChildProfiles } from "../ChildProfileContext";
 import { isChromeless } from "../../../lib/routes";
 
 export const NAV_ITEMS = [
@@ -21,7 +21,12 @@ function isActive(pathname: string, href: string) {
 
 export default function NavBar() {
   const pathname = usePathname();
-  const { avatar } = useAvatar();
+  const {
+    profiles,
+    activeProfileId,
+    profilesLoading,
+    selectProfile,
+  } = useChildProfiles();
 
   // Game and sign-in screens are full-screen: no navigation bar.
   if (isChromeless(pathname)) return null;
@@ -47,6 +52,23 @@ export default function NavBar() {
           </nav>
 
           <div className="flex items-center gap-2">
+            {!profilesLoading && profiles.length > 0 && (
+              <label className="flex min-w-0 items-center gap-1.5">
+                <span aria-hidden="true" className="text-2xl">
+                  {profiles.find((profile) => profile.id === activeProfileId)?.avatar ?? "👧"}
+                </span>
+                <select
+                  aria-label="Active child profile"
+                  className="ed-input h-11 max-w-32 py-0 text-sm"
+                  value={activeProfileId}
+                  onChange={(event) => selectProfile(event.target.value)}
+                >
+                  {profiles.map((profile) => (
+                    <option key={profile.id} value={profile.id}>{profile.nickname}</option>
+                  ))}
+                </select>
+              </label>
+            )}
             <span className="ed-chip ed-chip-sun" title="Daily streak (sample)">🔥 {learner.streak}</span>
             <span className="ed-chip ed-chip-sun hidden sm:inline-flex" title="Stars (sample)">⭐ {learner.stars}</span>
             <Link
@@ -54,7 +76,7 @@ export default function NavBar() {
               aria-label="Account"
               className="grid h-11 w-11 place-items-center rounded-full border-[3px] border-grape-400 bg-bubble-100 text-2xl shadow-[0_4px_0_#7b4dff] transition-transform hover:-translate-y-0.5"
             >
-              {avatar}
+              👤
             </Link>
           </div>
         </div>

@@ -5,6 +5,7 @@
 */
 
 export const MIN_PASSWORD_LENGTH = 8;
+export const MAX_PASSWORD_LENGTH = 128;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export type LoginValues = {
@@ -17,8 +18,6 @@ export type RegisterValues = {
   email: string;
   password: string;
   confirmPassword: string;
-  childName: string; // optional
-  ageGroup: string; // value from ageGroups in lib/sampleData.ts
   acceptedTerms: boolean;
 };
 
@@ -42,7 +41,11 @@ export function validateLogin(values: LoginValues): FieldErrors<LoginValues> {
 export function validateRegister(values: RegisterValues): FieldErrors<RegisterValues> {
   const errors: FieldErrors<RegisterValues> = {};
 
-  if (!values.parentName.trim()) errors.parentName = "Please enter your full name.";
+  if (!values.parentName.trim()) {
+    errors.parentName = "Please enter your full name.";
+  } else if (values.parentName.trim().length > 100) {
+    errors.parentName = "Your name is too long.";
+  }
 
   const email = emailError(values.email);
   if (email) errors.email = email;
@@ -51,6 +54,8 @@ export function validateRegister(values: RegisterValues): FieldErrors<RegisterVa
     errors.password = "Please choose a password.";
   } else if (values.password.length < MIN_PASSWORD_LENGTH) {
     errors.password = `Use at least ${MIN_PASSWORD_LENGTH} characters.`;
+  } else if (values.password.length > MAX_PASSWORD_LENGTH) {
+    errors.password = `Use no more than ${MAX_PASSWORD_LENGTH} characters.`;
   }
 
   if (!values.confirmPassword) {
@@ -59,9 +64,6 @@ export function validateRegister(values: RegisterValues): FieldErrors<RegisterVa
     errors.confirmPassword = "The passwords don't match.";
   }
 
-  // childName is optional: no validation needed.
-
-  if (!values.ageGroup) errors.ageGroup = "Please choose your child's age group.";
   if (!values.acceptedTerms) errors.acceptedTerms = "Please accept the terms and conditions to continue.";
 
   return errors;

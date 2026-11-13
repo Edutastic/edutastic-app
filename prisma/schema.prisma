@@ -1,7 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
   provider = "prisma-client"
@@ -10,4 +6,132 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
+
+// ==========================================
+// BETTER AUTH - AUTHENTICATION
+// ==========================================
+
+model User {
+  id            String         @id
+  name          String
+  email         String
+  emailVerified Boolean        @default(false)
+  image         String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  sessions      Session[]
+  accounts      Account[]
+  parentAccount ParentAccount?
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+// ==========================================
+// EDUTASTIC - PARENT ACCOUNT
+// ==========================================
+
+model ParentAccount {
+  id         String   @id @default(uuid()) @db.Uuid
+  authUserId String   @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relationships
+  authUser         User              @relation(fields: [authUserId], references: [id], onDelete: Cascade)
+  childProfiles    ChildProfile[]
+  parentalConsents ParentalConsent[]
+}
+
+// ==========================================
+// EDUTASTIC - CHILD PROFILES
+// ==========================================
+
+model ChildProfile {
+  id          String   @id @default(uuid()) @db.Uuid
+  parentId    String   @db.Uuid
+  nickname    String   @db.VarChar(50)
+  ageGroupKey String   @db.VarChar(10)
+  avatar      String   @db.VarChar(100)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relationships
+  parent           ParentAccount     @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  parentalConsents ParentalConsent[]
+
+  @@index([parentId])
+}
+
+// ==========================================
+// EDUTASTIC - PARENTAL CONSENT
+// ==========================================
+
+model ParentalConsent {
+  id             String   @id @default(uuid()) @db.Uuid
+  parentId       String   @db.Uuid
+  childProfileId String   @db.Uuid
+  consentType    String   @db.VarChar(100)
+  policyVersion  String   @db.VarChar(20)
+  granted        Boolean
+  recordedAt     DateTime @default(now())
+
+  // Relationships
+  parent       ParentAccount @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  childProfile ChildProfile  @relation(fields: [childProfileId], references: [id], onDelete: Cascade)
+
+  @@index([parentId])
+  @@index([childProfileId])
 }

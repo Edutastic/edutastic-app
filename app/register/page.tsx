@@ -6,14 +6,12 @@ import { useRouter } from "next/navigation";
 import AuthShell from "../../components/Auth/AuthShell";
 import FormField from "../../components/Auth/FormField";
 import PasswordField from "../../components/Auth/PasswordField";
-import AgeGroupCards from "../../components/Auth/AgeGroupCards";
-import { useRegistration } from "../../components/Auth/RegistrationContext";
 import { register } from "../../lib/auth/authService";
 import { MIN_PASSWORD_LENGTH, validateRegister, type RegisterValues } from "../../lib/auth/validation";
 
 /*
   Parent registration (frontend prototype).
-  Parents create the account and choose their child's age group.
+  Parents create their account.
   Form state is temporary and in-memory only; nothing is saved or sent anywhere.
   Real account creation belongs in lib/auth/authService.ts.
 */
@@ -25,14 +23,11 @@ const INITIAL: RegisterValues = {
   email: "",
   password: "",
   confirmPassword: "",
-  childName: "",
-  ageGroup: "",
   acceptedTerms: false,
 };
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { setRegistration } = useRegistration();
   const [values, setValues] = useState<RegisterValues>(INITIAL);
   const [touched, setTouched] = useState<Partial<Record<Field, boolean>>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -48,38 +43,40 @@ export default function RegisterPage() {
   const text = (f: Field) => (e: ChangeEvent<HTMLInputElement>) => set(f, e.target.value as never);
   const blur = (f: Field) => () => setTouched((t) => ({ ...t, [f]: true }));
 
+  
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
     setTouched({
       parentName: true,
       email: true,
       password: true,
       confirmPassword: true,
-      ageGroup: true,
       acceptedTerms: true,
     });
+
+    setFormError("");
+
     if (Object.keys(errors).length > 0) return;
 
     setSubmitting(true);
-    const result = await register({
-      parentName: values.parentName.trim(),
-      email: values.email.trim(),
-      password: values.password,
-      childName: values.childName.trim() || undefined,
-      ageGroup: values.ageGroup,
-    });
 
-    if (result.ok) {
-      // Keep only what the welcome screen needs, in memory. Never the password.
-      setRegistration({
+    try {
+      const result = await register({
         parentName: values.parentName.trim(),
         email: values.email.trim(),
-        childName: values.childName.trim(),
-        ageGroup: values.ageGroup,
+        password: values.password,
       });
-      router.push("/welcome");
-    } else {
-      setFormError(result.message);
+
+      if (result.ok) {
+        router.push("/");
+        router.refresh();
+      } else {
+        setFormError(result.message);
+      }
+    } catch {
+      setFormError("Something went wrong. Please try again.");
+    } finally {
       setSubmitting(false);
     }
   }
@@ -166,27 +163,6 @@ export default function RegisterPage() {
             />
           </FormField>
         </div>
-
-        <FormField id="reg-child" label="Child's name" optional hint="A first name or nickname is perfect.">
-          <input
-            id="reg-child"
-            className="ed-input"
-            type="text"
-            autoComplete="off"
-            placeholder="e.g. Sam"
-            value={values.childName}
-            onChange={text("childName")}
-          />
-        </FormField>
-
-        <AgeGroupCards
-          value={values.ageGroup}
-          onChange={(v) => {
-            set("ageGroup", v);
-            setTouched((t) => ({ ...t, ageGroup: true }));
-          }}
-          error={shown("ageGroup")}
-        />
 
         <div>
           <label className="flex cursor-pointer items-start gap-3 font-semibold">

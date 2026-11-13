@@ -1,14 +1,9 @@
-/*
-  PROTOTYPE AUTH SERVICE – NOT REAL AUTHENTICATION.
 
-  The login and registration pages only talk to this file. Today every call
-  succeeds after a short fake delay and nothing is stored or sent anywhere.
+import { authClient } from "../auth-client";
 
-  To add real authentication later, replace the bodies of login() and
-  register() with calls to your auth provider / API (and set a session
-  cookie on the server). The pages and their form state need no changes as
-  long as these functions keep returning an AuthResult.
-*/
+// ==========================================
+// TYPES
+// ==========================================
 
 export type LoginInput = {
   email: string;
@@ -20,23 +15,68 @@ export type RegisterInput = {
   parentName: string;
   email: string;
   password: string;
-  childName?: string;
-  ageGroup: string;
 };
 
-export type AuthResult = { ok: true } | { ok: false; message: string };
+export type AuthResult =
+  | { ok: true }
+  | { ok: false; message: string };
 
-const FAKE_NETWORK_DELAY_MS = 700;
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+// ==========================================
+// LOGIN
+// ==========================================
 
-export async function login(input: LoginInput): Promise<AuthResult> {
-  void input; // TODO: send to the real auth API
-  await wait(FAKE_NETWORK_DELAY_MS);
-  return { ok: true };
+export async function login(
+  input: LoginInput
+): Promise<AuthResult> {
+  try {
+    const { error } = await authClient.signIn.email({
+      email: input.email.trim(),
+      password: input.password,
+      rememberMe: input.remember,
+    });
+
+    if (error) {
+      return {
+        ok: false,
+        message: error.message ?? "Login failed.",
+      };
+    }
+
+    return { ok: true };
+  } catch {
+    return {
+      ok: false,
+      message: "Unable to connect. Please try again.",
+    };
+  }
 }
 
-export async function register(input: RegisterInput): Promise<AuthResult> {
-  void input; // TODO: create the parent account + child profile via the real API
-  await wait(FAKE_NETWORK_DELAY_MS);
-  return { ok: true };
+// ==========================================
+// REGISTRATION
+// ==========================================
+
+export async function register(
+  input: RegisterInput
+): Promise<AuthResult> {
+  try {
+    const { error } = await authClient.signUp.email({
+      name: input.parentName.trim(),
+      email: input.email.trim(),
+      password: input.password,
+    });
+
+    if (error) {
+      return {
+        ok: false,
+        message: error.message ?? "Registration failed.",
+      };
+    }
+
+    return { ok: true };
+  } catch {
+    return {
+      ok: false,
+      message: "Unable to connect. Please try again.",
+    };
+  }
 }

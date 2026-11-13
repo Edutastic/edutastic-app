@@ -5,6 +5,7 @@ import Stars from "../components/ui/Stars";
 import Mascot from "../components/ui/Mascot";
 import Decor from "../components/ui/Decor";
 import SectionHeading from "../components/ui/SectionHeading";
+import { ActiveChildCard, ActiveChildName } from "../components/Shared/ActiveChildIdentity";
 import { learner, subjects, recentActivities } from "../lib/sampleData";
 
 export default function Home() {
@@ -20,7 +21,7 @@ export default function Home() {
           <div className="space-y-4">
             <span className="ed-chip">👋 Welcome back</span>
             <h1 className="text-4xl font-bold leading-tight sm:text-5xl">
-              Hi {learner.name}! <br />
+              Hi <ActiveChildName fallback={learner.name} />! <br />
               Ready to <span className="text-sun-400">play &amp; learn?</span>
             </h1>
             <p className="max-w-lg text-lg text-white/85">
@@ -97,13 +98,12 @@ export default function Home() {
         <aside className="space-y-6">
           <section className="ed-card p-5">
             <h2 className="mb-3 text-2xl font-semibold">My progress</h2>
-            <div className="flex items-center gap-3">
-              <div className="grid h-14 w-14 place-items-center rounded-full bg-grape-100 text-3xl">{learner.avatar}</div>
-              <div>
-                <p className="font-display text-lg font-semibold leading-none">{learner.name}</p>
-                <p className="text-sm text-ink-soft">{learner.rank} · Age {learner.ageGroup}</p>
-              </div>
-            </div>
+            <ActiveChildCard
+              fallbackName={learner.name}
+              fallbackAvatar={learner.avatar}
+              fallbackAgeGroup={learner.ageGroup}
+              rank={learner.rank}
+            />
             <div className="mt-4 space-y-3">
               <div>
                 <div className="mb-1 flex justify-between text-sm font-bold">

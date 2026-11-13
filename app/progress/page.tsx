@@ -2,6 +2,7 @@ import Stars from "../../components/ui/Stars";
 import Button from "../../components/ui/Button";
 import ProgressBar from "../../components/ui/ProgressBar";
 import SectionHeading from "../../components/ui/SectionHeading";
+import { ActiveChildName } from "../../components/Shared/ActiveChildIdentity";
 import { learner, weekly, skills, stages, badges } from "../../lib/sampleData";
 
 export const metadata = { title: "Progress – Edutastic" };
@@ -23,7 +24,9 @@ export default function ProgressPage() {
       <section className="ed-hero px-6 py-8 sm:px-10">
         <span className="ed-chip">📈 Progress</span>
         <span className="ed-chip ed-chip-sun ml-2">🧪 Sample data</span>
-        <h1 className="mt-2 text-4xl font-bold sm:text-5xl">{learner.name}&apos;s progress</h1>
+        <h1 className="mt-2 text-4xl font-bold sm:text-5xl">
+          <ActiveChildName fallback={learner.name} />&apos;s progress
+        </h1>
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
             ["⭐", learner.stars, "Stars"],
