@@ -49,7 +49,7 @@ export default function TeacherPage() {
               </div>
             </div>
           ))}
-          <Button href="/subjects/math/levels" variant="coral" className="w-full">Back to learning</Button>
+          <Button href="/subjects/math" variant="coral" className="w-full">Back to learning</Button>
         </div>
       </div>
     </main>

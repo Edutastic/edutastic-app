@@ -33,14 +33,58 @@ export const ageGroups = [
   { value: "11-12", label: "Ages 11–12", emoji: "👑", blurb: "Brainy legends" },
 ];
 
+
 export const mathTopics = [
-  { name: "Topic One", emoji: "🍎", difficulty: "Easy", tint: "coral" as Tint, progress: 80 },
-  { name: "Topic Two", emoji: "🔷", difficulty: "Easy", tint: "bolt" as Tint, progress: 55 },
-  { name: "Topic Three", emoji: "⏰", difficulty: "Medium", tint: "sun" as Tint, progress: 30 },
-  { name: "Topic Four", emoji: "🧮", difficulty: "Medium", tint: "mint" as Tint, progress: 10 },
-  { name: "Topic Five", emoji: "🎲", difficulty: "Tricky", tint: "bubble" as Tint, progress: 0 },
-  { name: "Topic Six", emoji: "🧠", difficulty: "Tricky", tint: "grape" as Tint, progress: 0 },
+  {
+    name: "Number Forest",
+    emoji: "🌳",
+    description: "Learn to count numbers, fruits and forest animals!",
+    difficulty: "Easy",
+    tint: "coral" as Tint,
+    progress: 80,
+  },
+  {
+    name: "Pattern Bridge",
+    emoji: "🌈",
+    description: "Find patterns and discover what comes next!",
+    difficulty: "Easy",
+    tint: "bolt" as Tint,
+    progress: 55,
+  },
+  {
+    name: "Potion Shop",
+    emoji: "🧪",
+    description: "Sort magical ingredients into different groups!",
+    difficulty: "Medium",
+    tint: "sun" as Tint,
+    progress: 30,
+  },
+  {
+    name: "Giants Garden",
+    emoji: "🌻",
+    description: "Discover big and small things and compare their sizes!",
+    difficulty: "Medium",
+    tint: "mint" as Tint,
+    progress: 10,
+  },
+  {
+    name: "Picnic Village",
+    emoji: "🧺",
+    description: "Split treats and share quantities with friends!",
+    difficulty: "Tricky",
+    tint: "bubble" as Tint,
+    progress: 0,
+  },
+  {
+    name: "Shape Castle",
+    emoji: "🏰",
+    description: "Explore circles, squares, triangles and more!",
+    difficulty: "Tricky",
+    tint: "grape" as Tint,
+    progress: 0,
+  },
 ];
+
 
 export const recentActivities = [
   { title: "Activity Placeholder A", when: "Today", emoji: "🎈", stars: 3 },

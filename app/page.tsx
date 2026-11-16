@@ -33,7 +33,7 @@ export default function Home() {
               <span className="ed-chip">⚡ {learner.xp.toLocaleString()} XP</span>
             </div>
             <div className="flex flex-wrap gap-3 pt-1">
-              <Button href="/subjects/math/levels" variant="sun" size="lg">▶ Continue playing</Button>
+              <Button href="/game" variant="sun" size="lg">▶ Continue playing</Button>
               <Button href="/subjects" variant="white" size="lg">Pick a subject</Button>
             </div>
           </div>

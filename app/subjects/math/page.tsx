@@ -28,8 +28,7 @@ export default function MathPage() {
               Play, puzzle and power up your number skills. Every level earns you shiny stars!
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button href="/subjects/math/levels" variant="sun" size="lg">🗺️ Start the journey</Button>
-              <Button href="/game" variant="white" size="lg">👀 Preview a game</Button>
+              <Button href="/game" variant="sun" size="lg">▶ Start playing</Button>
             </div>
           </div>
           <div className="hidden justify-center md:flex" aria-hidden="true">
@@ -49,12 +48,12 @@ export default function MathPage() {
       </section>
 
       <section>
-        <SectionHeading eyebrow="Step 2" title="Pick a topic" actionLabel="Level path" actionHref="/subjects/math/levels" />
+        <SectionHeading eyebrow="Step 2" title="Pick a topic" />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {mathTopics.map((t) => (
             <Link
               key={t.name}
-              href="/subjects/math/levels"
+              href="/game"
               className={`ed-tint ed-tint-${t.tint} ed-card-hover block p-5 no-underline`}
             >
               <div className="flex items-start justify-between">
@@ -62,7 +61,7 @@ export default function MathPage() {
                 <span className={`ed-chip ${diffChip[t.difficulty]}`}>{t.difficulty}</span>
               </div>
               <h3 className="mt-3 text-2xl font-semibold">{t.name}</h3>
-              <p className="mb-3 text-sm text-grape-900/70">Placeholder topic description.</p>
+              <p className="mb-3 text-sm text-grape-900/70">{t.description}</p>
               <ProgressBar value={t.progress} label={`${t.name} progress`} />
               <p className="mt-1 text-sm font-bold text-grape-900/70">{t.progress}% complete</p>
             </Link>
