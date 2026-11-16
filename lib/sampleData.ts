@@ -27,9 +27,9 @@ export const subjects = [
 ];
 
 export const ageGroups = [
-  { value: "4-5", label: "Ages 4–5", emoji: "🐣", blurb: "Little explorers" },
-  { value: "6-8", label: "Ages 6–8", emoji: "🚀", blurb: "Rising stars" },
-  { value: "9-10", label: "Ages 9–10", emoji: "🏆", blurb: "Super champions" },
+  { value: "4-5", label: "Ages 4–5", emoji: "🐣", blurb: "Enchanted Kingdom" },
+  { value: "6-8", label: "Ages 6–8", emoji: "🚀", blurb: "Adventure Island" },
+  { value: "9-10", label: "Ages 9–10", emoji: "🏆", blurb: "Future Hub" },
   { value: "11-12", label: "Ages 11–12", emoji: "👑", blurb: "Brainy legends" },
 ];
 
