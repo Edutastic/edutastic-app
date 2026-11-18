@@ -34,15 +34,18 @@ export default function NavBar() {
   return (
     <>
       <header className="ed-nav">
-        <div className="ed-container flex h-[68px] items-center justify-between gap-4">
+        <div className="ed-container flex min-h-[68px] flex-wrap items-center justify-between gap-x-4 gap-y-2 py-2 md:h-[68px] md:flex-nowrap md:py-0">
           <Logo size="md" />
 
-          <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
+          <nav
+            aria-label="Main"
+            className="order-last flex w-full items-center gap-1 overflow-x-auto pb-1 md:order-none md:w-auto md:overflow-visible md:pb-0"
+          >
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="ed-navlink"
+                className="ed-navlink shrink-0 whitespace-nowrap"
                 aria-current={isActive(pathname, item.href) ? "page" : undefined}
               >
                 <span aria-hidden="true">{item.emoji}</span>
@@ -81,21 +84,6 @@ export default function NavBar() {
           </div>
         </div>
       </header>
-
-      {/* Mobile bottom tab bar */}
-      <nav aria-label="Main (mobile)" className="ed-tabbar md:hidden">
-        {NAV_ITEMS.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className="ed-tab"
-            aria-current={isActive(pathname, item.href) ? "page" : undefined}
-          >
-            <span aria-hidden="true">{item.emoji}</span>
-            <span>{item.label}</span>
-          </Link>
-        ))}
-      </nav>
     </>
   );
 }

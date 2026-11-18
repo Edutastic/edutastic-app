@@ -399,7 +399,4 @@ h1, h2, h3, h4, .font-display {
 .ed-input[aria-invalid="true"] { border-color: #ff6b6b; }
 .ed-input::placeholder { color: var(--ink-soft); opacity: 0.7; }
 
-/* Leave room for the mobile tab bar */
-@media (max-width: 767px) {
-  main { padding-bottom: 5.5rem; }
-}
+
