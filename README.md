@@ -4,11 +4,6 @@ Edutastic is a learning web application for children aged 4–12. Parents create
 
 This guide explains how to set up **Edutastic locally**, including PostgreSQL, Docker, Prisma, Better Auth, and the GitHub workflow.
 
-> **Short answer: Do teammates need Docker Desktop?**
-> **On Windows or macOS: yes, for our standard setup.** Install and run Docker Desktop before using `docker compose`. On Linux, Docker Engine with the Compose plugin is sufficient; Docker Desktop is optional. A compatible alternative Docker engine may also work, but this guide assumes Docker Desktop on Windows.
->
-> **Docker Desktop is not required if you choose to install PostgreSQL manually instead**, but our team setup uses Docker to keep the database configuration consistent.
-
 ## 1. How the local setup works
 
 - **Next.js** runs on your computer using `npm run dev`.

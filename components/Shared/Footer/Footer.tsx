@@ -20,7 +20,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="mt-10 pb-16 text-white md:pb-0"
+      className="mt-10 text-white"
       style={{ background: "linear-gradient(135deg,#26106a,#4b25b8)", borderTop: "6px solid #ffc83d" }}
     >
       <div className="ed-container grid gap-8 py-10 md:grid-cols-[1.4fr_1fr]">
